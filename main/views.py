@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -109,3 +110,18 @@ def delete_book(request, book_id):
     book.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@csrf_exempt
+def add_book_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        page = request.POST.get("page")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_book = Book(name=name, page=page, description=description, user=user)
+        new_book.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()

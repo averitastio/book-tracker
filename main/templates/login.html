@@ -5,12 +5,13 @@
 {% endblock meta %} 
 
 {% block content %}
-<div class="login">
+<div class="login" .bg-warning-subtle>
+  <div class="position-absolute top-50 start-50 translate-middle">
   <h1>Login</h1>
 
   <form method="POST" action="">
     {% csrf_token %}
-    <table>
+    <table class="table table-striped-columns">
       <tr>
         <td>Username:</td>
         <td>
@@ -50,6 +51,7 @@
   </ul>
   {% endif %} Don't have an account yet?
   <a href="{% url 'main:register' %}">Register Now</a>
+</div>
 </div>
 
 {% endblock content %}

@@ -5,13 +5,14 @@
 {% endblock meta %} 
 
 {% block content %}
-
+<div class="text-bg-secondary p-3">
+  <div class="position-absolute top-50 start-50 translate-middle">
 <div class="login">
   <h1>Register</h1>
 
   <form method="POST">
     {% csrf_token %}
-    <table>
+    <table class="table table-striped-columns">
       {{ form.as_table }}
       <tr>
         <td></td>
@@ -28,5 +29,6 @@
   </ul>
   {% endif %}
 </div>
-
+</div>
+</div>
 {% endblock content %}
